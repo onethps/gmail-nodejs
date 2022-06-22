@@ -36,10 +36,12 @@ app.post('/sendMessage', function (req, res) {
     transporter.sendMail({
         from: 'Portfolio Site', // sender address
         to: "onethps@gmail.com", // list of receivers
+        subject: `${subject}`,
+        text:`${message}`,
         message: `
-        <b>{subject}</b>
+        <b>${name}</b>
         <div>
-        <b>{message}</b>
+        <b>${message}</b>
         </div>
         `, // html body
     }).then(info => {
