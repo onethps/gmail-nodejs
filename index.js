@@ -38,7 +38,7 @@ app.post('/sendMessage', function (req, res) {
         to: "onethps@gmail.com", // list of receivers
         subject: `${subject}`,
         text:`${message}`,
-        message: `
+        html: `
         <b>${name}</b>
         <div>
         <b>${message}</b>
