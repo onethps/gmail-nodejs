@@ -6,18 +6,17 @@ import bodyParser from 'body-parser';
 const app = express();
 
 app.use(cors())
-
-app.use(bodyParser.urlencoded({
-    extended: false
-}))
-
+app.use(bodyParser.urlencoded({extended: false}))
 app.use(bodyParser.json())
+
+let smpt_login = process.env.SMTP_LOGIN || "---"
+let smpt_pass = process.env.SMTP_PASSWORD || "---"
 
 const transporter = nodemailer.createTransport({
     service: 'gmail',
     auth: {
-        user: 'onethps@gmail.com',
-        pass: 'xotnldlvxxsvwboi',
+        user: smpt_login,
+        pass: smpt_pass,
     },
 });
 
@@ -49,6 +48,8 @@ app.post('/sendMessage', function (req, res) {
     res.send('OK')
 })
 
-app.listen(3010, function () {
+let port = process.env.PORT || 3010
+
+app.listen(port, function () {
     console.log('OKAY!')
 })
