@@ -34,10 +34,11 @@ app.post('/sendMessage', function (req, res) {
     } = req.body
 
     transporter.sendMail({
-        from: `${email}`, // sender address
+        from: 'PORTFOLIO SITE', // sender address
         to: "onethps@gmail.com", // list of receivers
         subject: `${subject}`,
         html: `
+<b>${email}</b>
         <b>${name}</b>
         <div>
         <b>${message}</b>
