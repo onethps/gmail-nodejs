@@ -27,14 +27,18 @@ app.get('/', function (req, res) {
 
 app.post('/sendMessage', function (req, res) {
     let {
-        name
+        email,
+        message,
+        name,
+        subject
     } = req.body
 
     transporter.sendMail({
-        from: '"Portfolio Site', // sender address
+        from: `${email}`, // sender address
         to: "onethps@gmail.com", // list of receivers
-        subject: "Portfolio Message", // Subject line
-        html: `<b>HEY!</b>
+        subject: `${subject}`, // Subject line
+        name: `${name}`, // Subject line
+        message: `<b>${message}</b>
         <div>
         <b>There is a new article. It's about sending emails, check it out!</b>
         </div>
