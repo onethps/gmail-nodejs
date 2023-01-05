@@ -4,14 +4,26 @@ import cors from 'cors';
 import bodyParser from 'body-parser';
 
 const app = express();
+const port = process.env.PORT || 5000
 
-app.use(function(req, res, next) {
-    res.header("Access-Control-Allow-Origin", '*');
-    res.header("Access-Control-Allow-Credentials", true);
-    res.header('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE,OPTIONS');
-    res.header("Access-Control-Allow-Headers", 'Origin,X-Requested-With,Content-Type,Accept,content-type,application/json');
-    next();
-});
+
+let corsOrigins=[];
+
+if(process.env.REQUEST_ORIGIN){
+    corsOrigins=[process.env.REQUEST_ORIGIN];
+}
+else{
+    corsOrigins=["http://localhost:3000"];
+}
+const corsOptions = {
+    origin: corsOrigins,
+    methods:['GET','POST'],
+    allowedHeaders: ['Content-Type', 'Authorization']   
+};
+
+app.use(cors(corsOptions));
+
+
 app.use(bodyParser.urlencoded({extended: false}))
 app.use(bodyParser.json())
 
@@ -31,7 +43,7 @@ app.get('/', function (req, res) {
     res.send('Hello World')
 })
 
-app.post('/sendMessage', function (req, res) {
+app.post('/send_email', function (req, res) {
     let {
         email,
         message,
@@ -61,7 +73,6 @@ app.post('/sendMessage', function (req, res) {
     res.send('OK')
 })
 
-let port = process.env.PORT || 3010
 
 app.listen(port, function () {
     console.log('OKAY!')
