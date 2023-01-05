@@ -7,19 +7,11 @@ const app = express();
 const port = process.env.PORT || 5000
 
 
-let corsOrigins=[];
-
-if(process.env.REQUEST_ORIGIN){
-    corsOrigins=[process.env.REQUEST_ORIGIN];
-}
-else{
-    corsOrigins=["http://localhost:3000"];
-}
 const corsOptions = {
-    origin: corsOrigins,
-    methods:['GET','POST'],
-    allowedHeaders: ['Content-Type', 'Authorization']   
-};
+    origin: ["http://localhost:3000/", "https://onethps.github.io/it-inc-portfolio/"],
+    preflightContinue:false,
+    credentials: true
+  }
 
 app.use(cors(corsOptions));
 
